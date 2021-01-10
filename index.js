@@ -12,16 +12,20 @@ const bodyParser = require('body-parser');
 const saveOrder = require('./routes/saveOrder');
 const fetchCart = require('./routes/fetchCart');
 const profile = require('./routes/profile');
-
 require('dotenv').config();
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded(
     {
         extended: true
     }
 ));
-app.use(cors());
+
+var corsOptions = {
+    origin: 'https://hqclient.herokuapp.com',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions));
 app.use('/mens', mensShirts);
 app.use('/womens', womensShirts);
 app.use('/users', users);
