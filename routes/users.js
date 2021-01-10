@@ -18,10 +18,13 @@ router.post('/', async (req, res) => {
     if (existingUser) return res.send({ msg: "User already registered. Please Sign In", s: 404 });
 
     const record = new User(user);
-
     await record.save();
-
-    res.send({ ...user, msg: "Account successfully created", s: 200 });
+    const tokenDetails = {
+        'email': record.email,
+        'firstname': record.firstname,
+    }
+    const accessToken = jwt.sign(tokenDetails, process.env.JWT_SIGN);
+    res.send(accessToken);
 })
 
 module.exports = router
