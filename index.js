@@ -20,12 +20,12 @@ app.use(bodyParser.urlencoded(
     }
 ));
 
-var corsOptions = {
-    origin: 'https://hqclient.herokuapp.com',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+// var corsOptions = {
+//     origin: 'http:localhost:3000',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use('/mens', mensShirts);
 app.use('/womens', womensShirts);
 app.use('/users', users);
